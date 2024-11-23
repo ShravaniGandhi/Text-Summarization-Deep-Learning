@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarization with Attention</title>
+    <style>
+        /* General styles for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #4a90e2;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+
+        .summarization-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .summarization-form textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .secondary {
+            background-color: #7f8c8d;
+            color: white;
+        }
+
+        .primary:hover {
+            background-color: #357ABD;
+        }
+
+        .secondary:hover {
+            background-color: #6C7A7B;
+        }
+
+        .summary {
+            background-color: #ecf0f1;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .summary h2 {
+            color: #2980b9;
+        }
+
+        .summary p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Text Summarization</h1>
+            <p>Choose a summarization model to get the summary of your text</p>
+        </header>
+        <form method="POST" class="summarization-form">
+            <textarea name="input_text" rows="6" cols="50" placeholder="Enter text to summarize..." required></textarea><br><br>
+
+            <!-- Buttons to select model -->
+            <div class="button-group">
+                <button type="submit" name="with_attention" class="btn primary">Summarize with Attention</button>
+                <button type="submit" name="without_attention" class="btn secondary">Summarize without Attention</button>
+            </div>
+        </form>
+
+        {% if summary %}
+            <section class="summary">
+                <h2>Summary ({{ model_type }}):</h2>
+                <p>{{ summary }}</p>
+            </section>
+        {% endif %}
+    </div>
+</body>
+</html>
